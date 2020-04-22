@@ -50,7 +50,7 @@ int main() {
 	theBoard.printBoard();
 	theBoard.printBoardDark();
 
-	while (i < 20) {
+	while (!theBoard.gameOver()) {
 		theBoard.playerMove();
 		i++;
 	}

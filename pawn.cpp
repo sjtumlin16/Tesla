@@ -66,3 +66,25 @@ bool Pawn::spotOccupied(coords candidate) {
     return (this->xCoord == candidate.xCoord && 
     	this->yCoord == candidate.yCoord);
 }
+
+int Pawn::ySign(coords ref) {
+	int num;
+    num = ref.yCoord - this->yCoord;
+
+    if (num == 0) {
+    	return 0;
+    }
+
+    return num / fabs(num);
+}
+
+int Pawn::xSign(coords ref) {
+	int num;
+    num = ref.xCoord - this->xCoord;
+
+    if (num == 0) {
+    	return 0;
+    }
+    
+    return num / fabs(num);
+}

@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath> 
-#include<limits> 
+#include <limits> 
 
 using namespace std;
 
@@ -35,6 +35,8 @@ class Pawn {
     bool deactivate();
     bool getActivatedState();
     bool spotOccupied(coords);
+    int ySign(coords);
+    int xSign(coords);
 
 };
 

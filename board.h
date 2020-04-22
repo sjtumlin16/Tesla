@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath> 
-#include<limits> 
+#include <limits> 
 
 using namespace std;
 
@@ -20,7 +20,7 @@ class Board {
     Pawn pinto;
     Pawn roadster;
     Pawn elon;
-    bool gameOver;
+    bool isGameOver;
 
   public:
     Board();
@@ -33,10 +33,11 @@ class Board {
     bool printBoard();
     bool printBoardDark();
     bool playerMove();
+    bool activeMove(Pawn*);
     void updatePawns();
     void activationWarning(Pawn*);
+    bool gameOver();
     void gameOver(Pawn*);
-
 };
 
 #endif

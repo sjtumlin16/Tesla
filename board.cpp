@@ -1,14 +1,14 @@
 #include "board.h"
 
 Board::Board() {
-	allPawns = {&player, &yugo, &pinto, &roadster, &elon};
+	allPawns = {&player, &yugo, &pinto, &elon, &roadster};
 	allPawns.at(0)->setName("yourself?", 'O');
 	allPawns.at(1)->setName("the Yugo", 'Y');
 	allPawns.at(2)->setName("the Pinto", 'P');
 	allPawns.at(3)->setName("Elon", 'E');
 	allPawns.at(4)->setName("the Roadster", 'R');
 
-	gameOver = false;
+	isGameOver = false;
 }
 
 bool Board::checkSpot(coords inp) {
@@ -156,6 +156,11 @@ bool Board::printBoardDark() {
 	coords temp;
 
 	cout << string(100, '\n');
+
+	cout << " Y: [/" << (yugo.getActivatedState() ? " " : "/") << "] P: [/" 
+	  << (pinto.getActivatedState() ? " " : "/") << "] E: [" 
+	  << (elon.getActivatedState() ? "AWOKEN" : "Asleep") << "]" << endl;
+
 	for (int i = 0; i < 15; i++) {
 		temp.yCoord = i;
 		for (int j = 0; j < 15; j++) {
@@ -247,6 +252,76 @@ bool Board::playerMove() {
 	return true;
 }
 
+bool Board::activeMove(Pawn *thePawn) {
+	int x, y;
+	coords newCoord, oldCoords;
+	int inp;
+	bool cont;
+
+	do {
+		cont = true;
+
+		inp = rand() % 6;
+
+		switch (inp) {
+			case 0: 
+				y = -1;
+				x = 0;
+			break;
+
+			case 1: 
+				y = 0;
+				x = -1;
+			break;
+
+			case 2: 
+				y = 1;
+				x = 0;
+			break;
+
+			case 3: 
+				y = 0;
+				x = 1;
+			break;
+
+			case 4:
+				y = thePawn->ySign(player.getCoords());
+				x = 0;
+			break;
+
+			case 5:
+				y = 0;
+				x = thePawn->xSign(player.getCoords());
+			break;
+
+			default:
+				cont = false;
+		}
+
+		oldCoords = thePawn->getCoords();
+
+		newCoord.xCoord = oldCoords.xCoord + x;
+		newCoord.yCoord = oldCoords.yCoord + y;
+
+		if (checkSpot(newCoord)) {
+			cont = false;
+		}
+
+		if (offBoard(newCoord)) {
+			cont = false;
+		}
+
+		if (checkArea(newCoord, &player)) {
+			cont = false;
+		}
+
+	} while(!cont);
+
+	thePawn->setCoords(newCoord);
+
+	return true;
+}
+
 void Board::updatePawns() {
 	for (int i = 1; i < allPawns.size(); i++) {
 		if (checkArea(allPawns.at(i)->getCoords(), &player)) {
@@ -257,6 +332,10 @@ void Board::updatePawns() {
 				activationWarning(allPawns.at(i));
 			}
 		}
+	}
+
+	if (elon.getActivatedState()) {
+		activeMove(&elon);
 	}
 
 	return;
@@ -274,6 +353,10 @@ void Board::activationWarning(Pawn *thePawn) {
 	return;
 }
 
+bool Board::gameOver() {
+	return isGameOver;
+}
+
 void Board::gameOver(Pawn *thePawn) {
 	if (thePawn->getSymb() == 'E') {
 		cout << "Welp, Elon got you. Good luck in space." << endl;
@@ -285,7 +368,7 @@ void Board::gameOver(Pawn *thePawn) {
 		cout << "Wrong car. I told you to be careful..." << endl;
 	}
 
-	gameOver = true;
+	isGameOver = true;
 
 	return;
 }
