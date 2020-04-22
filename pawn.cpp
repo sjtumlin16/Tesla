@@ -1,10 +1,18 @@
 #include "pawn.h"
 
-Pawn::Pawn(string name, coords temp) {
-    this->name = name;
-    this->xCoord = temp.xCoord;
-    this->yCoord = temp.yCoord;
+Pawn::Pawn() {
+    this->name = "null";
+    this->symb = '*';
+    this->xCoord = -99;
+    this->yCoord = -99;
     this->activated = false;
+}
+
+void Pawn::setName(string name, char symb) {
+	this->name = name;
+	this->symb = symb;
+
+	return;
 }
 
 bool Pawn::setCoords(coords temp) {
@@ -24,6 +32,10 @@ coords Pawn::getCoords() {
 
 string Pawn::getName() {
     return name;
+}
+
+char Pawn::getSymb() {
+    return symb;
 }
 
 bool Pawn::activate() {
