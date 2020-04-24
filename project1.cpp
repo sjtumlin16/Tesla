@@ -1,5 +1,6 @@
 #include "pawn.h"
 #include "board.h"
+#include "gameplay.h"
 
 /*bool checkSpots(coords spot) {
 	for (int i = 0; i < allPawns.size(); i++) {
@@ -42,18 +43,10 @@ int main() {
 			allPawns.at(i)->getCoords().xCoord << endl;
 	}*/
 	srand (time(NULL));
-	Board theBoard;
-	char inp;
-	int i = 0;
 
-	theBoard.initialize();
-	theBoard.printBoard();
-	theBoard.printBoardDark();
+	Gameplay game;
 
-	while (!theBoard.gameOver()) {
-		theBoard.playerMove();
-		i++;
-	}
+	game.playGame();
 
 	return 0;
 }
