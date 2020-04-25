@@ -1,21 +1,19 @@
 #include "board.h"
+#include "constants.h"
 
 Board::Board() {
 	allPawns = {&player, &yugo, &pinto, &elon, &roadster};
-	allPawns.at(0)->setName("yourself?", 'O');
-	allPawns.at(1)->setName("the Yugo", 'Y');
-	allPawns.at(2)->setName("the Pinto", 'P');
-	allPawns.at(3)->setName("Elon", 'E');
-	allPawns.at(4)->setName("the Roadster", 'R');
+	allPawns.at(0)->setName("yourself?", PLAYER);
+	allPawns.at(1)->setName("the Yugo", YUGO);
+	allPawns.at(2)->setName("the Pinto", PINTO);
+	allPawns.at(3)->setName("Elon", ELON);
+	allPawns.at(4)->setName("the Roadster", ROADSTER);
 
 	isGameOver = false;
 }
 
 bool Board::checkSpot(coords inp) {
-	//cout << "here: " << inp.xCoord << " " << inp.yCoord << endl;
 	for (int i = 0; i < allPawns.size(); i++) {
-		//cout << player.getCoords().xCoord << endl;
-		//cout << "val: " << allPawns.at(i)->getCoords().xCoord << " " << allPawns.at(i)->getCoords().yCoord << endl;
 		if ((allPawns.at(i)->getCoords().xCoord == inp.xCoord) && (allPawns.at(i)->getCoords().yCoord == inp.yCoord)) {
 			return true;
 		}
@@ -25,10 +23,7 @@ bool Board::checkSpot(coords inp) {
 }
 
 char Board::whatsThere(coords inp) {
-	//cout << "here: " << inp.xCoord << " " << inp.yCoord << endl;
 	for (int i = 0; i < allPawns.size(); i++) {
-		//cout << player.getCoords().xCoord << endl;
-		//cout << "val: " << allPawns.at(i)->getCoords().xCoord << " " << allPawns.at(i)->getCoords().yCoord << endl;
 		if ((allPawns.at(i)->getCoords().xCoord == inp.xCoord) && (allPawns.at(i)->getCoords().yCoord == inp.yCoord)) {
 			return allPawns.at(i)->getSymb();
 		}
@@ -38,7 +33,7 @@ char Board::whatsThere(coords inp) {
 }
 
 bool Board::checkArea(coords inp) {
-	vector<coords> area(8);
+	vector<coords> area(AREA_SIZE);
 	area.at(0).xCoord = inp.xCoord - 1;
 	area.at(0).yCoord = inp.yCoord - 1;
 	area.at(1).xCoord = inp.xCoord;
@@ -57,7 +52,6 @@ bool Board::checkArea(coords inp) {
 	area.at(7).yCoord = inp.yCoord + 1;
 
 	for (int i = 0; i < area.size(); i++) {
-		//cout << area.at(i).xCoord << " " << area.at(i).yCoord << " " << (allPawns.at(1)->getCoords().xCoord == area.at(i).xCoord) << endl;
 		if (checkSpot(area.at(i))) {
 			return true;
 		}
@@ -67,7 +61,7 @@ bool Board::checkArea(coords inp) {
 }
 
 bool Board::checkArea(coords inp, Pawn *thePawn) {
-	vector<coords> area(8);
+	vector<coords> area(AREA_SIZE);
 	area.at(0).xCoord = inp.xCoord - 1;
 	area.at(0).yCoord = inp.yCoord - 1;
 	area.at(1).xCoord = inp.xCoord;
@@ -88,7 +82,6 @@ bool Board::checkArea(coords inp, Pawn *thePawn) {
 	char thisChar = thePawn->getSymb();
 
 	for (int i = 0; i < area.size(); i++) {
-		//cout << area.at(i).xCoord << " " << area.at(i).yCoord << " " << (allPawns.at(1)->getCoords().xCoord == area.at(i).xCoord) << endl;
 		if (checkSpot(area.at(i)) && (whatsThere(area.at(i)) == thisChar)) {
 			return true;
 		}
@@ -114,11 +107,9 @@ bool Board::initialize() {
 		coords temp;
 
 		do {
-			temp.xCoord = rand() % 15;
-			temp.yCoord = rand() % 15;
+			temp.xCoord = rand() % BOARD_COLUMNS;
+			temp.yCoord = rand() % BOARD_ROWS;
 		} while (checkArea(temp) || checkSpot(temp));
-
-		// cout << "setting " << allPawns.at(i)->getSymb() << " " << temp.xCoord << " " << temp.yCoord << endl;
 
 		allPawns.at(i)->setCoords(temp);
 	}
@@ -132,9 +123,9 @@ bool Board::printBoard() {
 	char printChar;
 	coords temp;
 
-	for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < BOARD_ROWS; i++) {
 		temp.yCoord = i;
-		for (int j = 0; j < 15; j++) {
+		for (int j = 0; j < BOARD_COLUMNS; j++) {
 			temp.xCoord = j;
 			if (checkSpot(temp)) {
 				printChar = whatsThere(temp);
@@ -161,9 +152,9 @@ bool Board::printBoardDark() {
 	  << (pinto.getActivatedState() ? " " : "/") << "] E: [" 
 	  << (elon.getActivatedState() ? "AWOKEN" : "Asleep") << "]" << endl;
 
-	for (int i = 0; i < 15; i++) {
+	for (int i = 0; i < BOARD_ROWS; i++) {
 		temp.yCoord = i;
-		for (int j = 0; j < 15; j++) {
+		for (int j = 0; j < BOARD_COLUMNS; j++) {
 			temp.xCoord = j;
 			if (checkSpot(temp) && (whatsThere(temp) == 'O')) {
 				printChar = whatsThere(temp);
@@ -203,23 +194,23 @@ bool Board::playerMove() {
 
 		switch (inp) {
 			case 'W': case 'w': 
-				y = -1;
-				x = 0;
+				y = MOVE_UP;
+				x = MOVE_NONE;
 			break;
 
 			case 'A': case 'a': 
-				y = 0;
-				x = -1;
+				y = MOVE_NONE;
+				x = MOVE_LEFT;
 			break;
 
 			case 'S': case 's': 
-				y = 1;
-				x = 0;
+				y = MOVE_DOWN;
+				x = MOVE_NONE;
 			break;
 
 			case 'D': case 'd': 
-				y = 0;
-				x = 1;
+				y = MOVE_NONE;
+				x = MOVE_RIGHT;
 			break;
 
 			default:
@@ -261,36 +252,36 @@ bool Board::activeMove(Pawn *thePawn) {
 	do {
 		cont = true;
 
-		inp = rand() % 6;
+		inp = rand() % ACTIVE_MOVE_STATES;
 
 		switch (inp) {
 			case 0: 
-				y = -1;
-				x = 0;
+				y = MOVE_UP;
+				x = MOVE_NONE;
 			break;
 
 			case 1: 
-				y = 0;
-				x = -1;
+				y = MOVE_NONE;
+				x = MOVE_LEFT;
 			break;
 
 			case 2: 
-				y = 1;
-				x = 0;
+				y = MOVE_DOWN;
+				x = MOVE_NONE;
 			break;
 
 			case 3: 
-				y = 0;
-				x = 1;
+				y = MOVE_NONE;
+				x = MOVE_RIGHT;
 			break;
 
 			case 4:
 				y = thePawn->ySign(player.getCoords());
-				x = 0;
+				x = MOVE_NONE;
 			break;
 
 			case 5:
-				y = 0;
+				y = MOVE_NONE;
 				x = thePawn->xSign(player.getCoords());
 			break;
 

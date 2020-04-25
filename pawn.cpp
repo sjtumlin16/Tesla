@@ -1,10 +1,11 @@
 #include "pawn.h"
+#include "constants.h"
 
 Pawn::Pawn() {
     this->name = "null";
     this->symb = '*';
-    this->xCoord = -99;
-    this->yCoord = -99;
+    this->xCoord = NULL_COORD_X;
+    this->yCoord = NULL_COORD_Y;
     this->activated = false;
 }
 
