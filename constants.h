@@ -17,5 +17,6 @@ const char YUGO = 'Y';
 const char PINTO = 'P';
 const char ELON = 'E';
 const char ROADSTER = 'R';
+const int ELON_WAKE_STATES = 5;
 
 #endif

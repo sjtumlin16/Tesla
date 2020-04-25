@@ -20,16 +20,10 @@ class Board {
     Pawn pinto;
     Pawn roadster;
     Pawn elon;
+    bool elonAwake;
     bool isGameOver;
-
-  public:
-    Board();
-    bool checkSpot(coords);
-    char whatsThere(coords);
-    bool checkArea(coords);
-    bool checkArea(coords, Pawn*);
-    bool offBoard(coords);
-    bool initialize();
+    vector<char> plays;
+    
     bool printBoard();
     bool printBoardDark();
     bool playerMove();
@@ -39,6 +33,16 @@ class Board {
     bool gameOver();
     void gameOver(Pawn*);
     void help();
+    void trackPlays(char);
+    bool checkSpot(coords);
+    char whatsThere(coords);
+    bool checkArea(coords);
+    bool checkArea(coords, Pawn*);
+    bool offBoard(coords);
+
+  public:
+    Board();
+    bool initialize();
 };
 
 #endif

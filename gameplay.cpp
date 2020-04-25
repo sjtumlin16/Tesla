@@ -65,6 +65,6 @@ void Gameplay::goodbye() {
     cout << endl << "Thanks for playing, we hope you" << endl;
     cout << "had fun!" << endl;
     cout << "If you did, consider giving us 5 stars on" << endl;
-    cout << "the AppStore (and a 100%% on the" << endl;
+    cout << "the AppStore (and a 100% on the" << endl;
     cout << "assignment)." << endl;
 }
