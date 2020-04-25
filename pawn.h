@@ -12,17 +12,17 @@
 using namespace std;
 
 struct coords {
-	int xCoord;
-	int yCoord;
+  int xCoord;
+  int yCoord;
 };
 
 class Pawn {
   private:
-  	string name;
+    string name;
     char symb;
-  	int xCoord;
-  	int yCoord;
-  	bool activated;
+    int xCoord;
+    int yCoord;
+    bool activated;
 
   public:
     Pawn();

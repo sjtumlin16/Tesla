@@ -5,12 +5,12 @@
 #include "gameplay.h"
 
 int main() {
-	srand (time(NULL));
-	Gameplay game;
+    srand (time(NULL));
+    Gameplay game;
 
-	game.printInstructions();
-	game.playGame();
-	// game.goodbye();
+    game.printInstructions();
+    game.playGame();
+    game.goodbye();
 
-	return 0;
+    return 0;
 }

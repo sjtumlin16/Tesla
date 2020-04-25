@@ -14,12 +14,12 @@ using namespace std;
 
 class Gameplay {
   private:
-    Board theBoard;
 
   public:
     Gameplay();
     void playGame();
     void printInstructions();
+    void goodbye();
 };
 
 #endif
