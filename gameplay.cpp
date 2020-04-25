@@ -35,9 +35,16 @@ void Gameplay::printInstructions() {
     cout << "Move down:   <S>" << endl;
     cout << "Move left:   <A>" << endl;
     cout << "Move right:  <D>" << endl;
-    cout << "Type \"help\" at any time during the game" << endl;
+    cout << "Type \"h\" for help at any time during" << endl;
+    cout << "the game" << endl;
+    cout << "Be sure to hit <enter> after typing your" << endl;
+    cout << "play" << endl;
+    cout << endl;
+    cout << "If you run into the Yugo, the Pinto, or" << endl;
+    cout << "you should move away immediately" << endl;
     cout << endl;
     cout << "Type \"ok\" to continue..." << endl;
+    cout << endl;
 
     do {
         cin >> inp;

@@ -38,6 +38,7 @@ class Board {
     void activationWarning(Pawn*);
     bool gameOver();
     void gameOver(Pawn*);
+    void help();
 };
 
 #endif

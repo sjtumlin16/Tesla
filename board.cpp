@@ -213,6 +213,11 @@ bool Board::playerMove() {
 				x = MOVE_RIGHT;
 			break;
 
+			case 'H': case 'h':
+				help();
+				cont = false;
+			break;
+
 			default:
 				cont = false;
 		}
@@ -275,12 +280,12 @@ bool Board::activeMove(Pawn *thePawn) {
 				x = MOVE_RIGHT;
 			break;
 
-			case 4:
+			case 4: case 5:
 				y = thePawn->ySign(player.getCoords());
 				x = MOVE_NONE;
 			break;
 
-			case 5:
+			case 6: case 7:
 				y = MOVE_NONE;
 				x = thePawn->xSign(player.getCoords());
 			break;
@@ -299,10 +304,6 @@ bool Board::activeMove(Pawn *thePawn) {
 		}
 
 		if (offBoard(newCoord)) {
-			cont = false;
-		}
-
-		if (checkArea(newCoord, &player)) {
 			cont = false;
 		}
 
@@ -362,4 +363,28 @@ void Board::gameOver(Pawn *thePawn) {
 	isGameOver = true;
 
 	return;
+}
+
+void Board::help() {
+	string inp;
+
+    cout << "                Controls                " << endl;
+    cout << "Move up:     <W>" << endl;
+    cout << "Move down:   <S>" << endl;
+    cout << "Move left:   <A>" << endl;
+    cout << "Move right:  <D>" << endl;
+    cout << "Type \"h\" for help at any time during" << endl;
+    cout << "the game" << endl;
+    cout << "Be sure to hit <enter> after typing your" << endl;
+    cout << "play" << endl;
+    cout << endl;
+    cout << "If you run into the Yugo, the Pinto, or" << endl;
+    cout << "you should move away immediately" << endl;
+    cout << endl;
+    cout << "Type \"ok\" to continue..." << endl;
+    cout << endl;
+
+    do {
+        cin >> inp;
+    } while (!(inp == "ok" || inp == "Ok" || inp == "OK"));
 }
