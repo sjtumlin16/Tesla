@@ -1,3 +1,5 @@
+// Seth Tumlin & Devlin Sheehan
+
 #include "pawn.h"
 #include "board.h"
 #include "gameplay.h"
