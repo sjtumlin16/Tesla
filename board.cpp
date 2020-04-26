@@ -149,7 +149,7 @@ bool Board::printBoardDark() {
     char printChar;
     coords temp;
 
-    cout << string(100, '\n');
+    cout << string(SPACING_LINES, '\n');
 
     cout << " Y: [/" << (yugo.getActivatedState() ? " " : "/") << "] P: [/" 
       << (pinto.getActivatedState() ? " " : "/") << "] E: [" 
@@ -427,6 +427,63 @@ void Board::trackPlays(char currPlay) {
             elonAwake = true;
             cout << "ELON HAS AWOKEN." << endl;
             cout << "He will be looking for you now" << endl;
+        }
+    }
+}
+
+void Board::hint() {
+    int hintType, xRange, yRange;
+
+    if (elonAwake) {
+        hintType = rand() % ELON_HINT_STATES;
+    }
+    else {
+        hintType = rand() % (ELON_HINT_STATES - 1) + 1;
+    }
+    
+    if (!hintType) {
+        xRange = elon.xDiff(player.getCoords());
+        yRange = elon.yDiff(player.getCoords());
+
+        if ((xRange == CLOSE_PAWN && yRange < CLOSE_PAWN) ||
+            (yRange == CLOSE_PAWN && xRange < CLOSE_PAWN)) {
+            cout << "ELON IS RIGHT NEXT TO YOU!\n" << endl;
+        }
+        else if (xRange < MEDIUM_PAWN && yRange < MEDIUM_PAWN) {
+            cout << "Elon is withing striking \ndistance!" << endl;
+        }
+        else if (xRange < FAR_PAWN && yRange < FAR_PAWN) {
+            cout << "Elon is hot on your tracks.\n" << endl;
+        }
+        else {
+            cout << "No need to worry about Elon \nat the moment." << endl;
+        }
+    }
+    else if (hintType < ROADSTER_HINT_THRESHOLD) {
+        xRange = roadster.xDiff(player.getCoords());
+        yRange = roadster.yDiff(player.getCoords());
+
+        if ((xRange == CLOSE_PAWN && yRange < CLOSE_PAWN) ||
+            (yRange == CLOSE_PAWN && xRange < CLOSE_PAWN)) {
+            cout << "YOU'RE ALMOST TO THE ROADSTER!\n" << endl;
+        }
+        else if (xRange < FAR_PAWN && yRange < FAR_PAWN) {
+            cout << "You can probably smell the \nRoadster from here." << endl;
+        }
+        else {
+            cout << "Try looking somewhere else.\n" << endl;
+        }
+
+    }
+    else {
+        if (hintType == ENCOURAGEMENT_HINT) {
+            cout << "Keep up the effort!\n" << endl;
+        }
+        else if (hintType == INTERESTING_FACT) {
+            cout << "The Roadster can achieve \nspeeds up to 250 mph!" << endl;
+        }
+        else {
+            cout << "The 2020 Roadster is expected \nto cost $200,000!" << endl;
         }
     }
 }

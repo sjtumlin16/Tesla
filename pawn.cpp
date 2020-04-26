@@ -89,3 +89,25 @@ int Pawn::xSign(coords ref) {
     
     return num / fabs(num);
 }
+
+int Pawn::yDiff(coords ref) {
+    int num;
+    num = ref.yCoord - this->yCoord;
+
+    if (num == 0) {
+        return 0;
+    }
+
+    return fabs(num);
+}
+
+int Pawn::xDiff(coords ref) {
+    int num;
+    num = ref.xCoord - this->xCoord;
+
+    if (num == 0) {
+        return 0;
+    }
+    
+    return fabs(num);
+}

@@ -37,7 +37,8 @@ class Pawn {
     bool spotOccupied(coords);
     int ySign(coords);
     int xSign(coords);
-
+    int yDiff(coords);
+    int xDiff(coords);
 };
 
 #endif

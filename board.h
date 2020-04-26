@@ -23,15 +23,10 @@ class Board {
     bool elonAwake;
     bool isGameOver;
     vector<char> plays;
-    
-    bool printBoard();
-    bool printBoardDark();
-    bool playerMove();
+
     bool activeMove(Pawn*);
     void updatePawns();
     void activationWarning(Pawn*);
-    bool gameOver();
-    void gameOver(Pawn*);
     void help();
     void trackPlays(char);
     bool checkSpot(coords);
@@ -39,10 +34,16 @@ class Board {
     bool checkArea(coords);
     bool checkArea(coords, Pawn*);
     bool offBoard(coords);
+    void hint();
 
   public:
     Board();
     bool initialize();
+    bool printBoard();
+    bool printBoardDark();
+    bool gameOver();
+    void gameOver(Pawn*);
+    bool playerMove();
 };
 
 #endif

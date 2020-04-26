@@ -1,4 +1,5 @@
 #include "gameplay.h"
+#include "constants.h"
 
 Gameplay::Gameplay() {
 
@@ -38,7 +39,45 @@ void Gameplay::printInstructions() {
     cout << "    Additionally, Elon himself is asleep" << endl;
     cout << "somewhere in the room. If you wake him," << endl;
     cout << "he'll start looking for you. If he finds" << endl;
-    cout << "you, you're going to space." << endl;
+    cout << "you twice, you're going to space." << endl;
+    cout << endl;
+    cout << "                Controls                " << endl;
+    cout << "Move up:     <W>" << endl;
+    cout << "Move down:   <S>" << endl;
+    cout << "Move left:   <A>" << endl;
+    cout << "Move right:  <D>" << endl;
+    cout << "Type \"h\" for help at any time during" << endl;
+    cout << "the game" << endl;
+    cout << "Be sure to hit <enter> after typing your" << endl;
+    cout << "play" << endl;
+    cout << endl;
+    cout << "If you run into the Yugo, the Pinto, or" << endl;
+    cout << "you should move away immediately" << endl;
+    cout << endl;
+    cout << "Type \"ok\" to continue..." << endl;
+    cout << endl;
+
+    do {
+        cin >> inp;
+    } while (!(inp == "ok" || inp == "Ok" || inp == "OK"));
+
+    cout << string(SPACING_LINES, '\n');
+
+    cout << endl << endl;
+    cout << "            Welcome to Tesla!            " << endl;
+    cout << endl;
+    cout << "    - Try not to move in the same" << endl;
+    cout << "direction for too long. If you do, there" << endl;
+    cout << "is a chance that Elon could wake up. He" << endl;
+    cout << "can also be woken up if you stand right" << endl;
+    cout << "next to him." << endl;
+    cout << "    - Hints will be displayed at the" << endl;
+    cout << "bottom of the board. Some will help you" << endl;
+    cout << "find the Roadster, some will let you know" << endl;
+    cout << "where Elon is, and some will tell you fun" << endl;
+    cout << "factoids!" << endl;
+    cout << "    - Remember, be careful. Because you'd" << endl;
+    cout << "rather have a Roadster be sent to space." << endl;
     cout << endl;
     cout << "                Controls                " << endl;
     cout << "Move up:     <W>" << endl;

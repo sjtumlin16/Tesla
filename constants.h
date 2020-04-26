@@ -18,5 +18,14 @@ const char PINTO = 'P';
 const char ELON = 'E';
 const char ROADSTER = 'R';
 const int ELON_WAKE_STATES = 5;
+const int ELON_HINT_STATES = 8;
+const int ROADSTER_HINT_THRESHOLD = 5;
+const int CLOSE_PAWN = 2;
+const int MEDIUM_PAWN = 3;
+const int FAR_PAWN = 5;
+const int ENCOURAGEMENT_HINT = 5;
+const int INTERESTING_FACT = 6;
+const int SPACING_LINES = 100;
+
 
 #endif
