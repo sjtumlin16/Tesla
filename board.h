@@ -35,6 +35,7 @@ class Board {
     bool checkArea(coords, Pawn*);
     bool offBoard(coords);
     void hint();
+    vector<coords> createArea(coords);
 
   public:
     Board();

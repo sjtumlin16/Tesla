@@ -35,7 +35,7 @@ char Board::whatsThere(coords inp) {
     return 'n';
 }
 
-bool Board::checkArea(coords inp) {
+vector<coords> Board::createArea(coords inp) {
     vector<coords> area(AREA_SIZE);
     area.at(0).xCoord = inp.xCoord - 1;
     area.at(0).yCoord = inp.yCoord - 1;
@@ -53,6 +53,12 @@ bool Board::checkArea(coords inp) {
     area.at(6).yCoord = inp.yCoord + 1;
     area.at(7).xCoord = inp.xCoord + 1;
     area.at(7).yCoord = inp.yCoord + 1;
+
+    return area;
+}
+
+bool Board::checkArea(coords inp) {
+    vector<coords> area = createArea(inp);
 
     for (int i = 0; i < area.size(); i++) {
         if (checkSpot(area.at(i))) {
@@ -64,23 +70,7 @@ bool Board::checkArea(coords inp) {
 }
 
 bool Board::checkArea(coords inp, Pawn *thePawn) {
-    vector<coords> area(AREA_SIZE);
-    area.at(0).xCoord = inp.xCoord - 1;
-    area.at(0).yCoord = inp.yCoord - 1;
-    area.at(1).xCoord = inp.xCoord;
-    area.at(1).yCoord = inp.yCoord - 1;
-    area.at(2).xCoord = inp.xCoord + 1;
-    area.at(2).yCoord = inp.yCoord - 1;
-    area.at(3).xCoord = inp.xCoord - 1;
-    area.at(3).yCoord = inp.yCoord;
-    area.at(4).xCoord = inp.xCoord + 1;
-    area.at(4).yCoord = inp.yCoord;
-    area.at(5).xCoord = inp.xCoord - 1;
-    area.at(5).yCoord = inp.yCoord + 1;
-    area.at(6).xCoord = inp.xCoord;
-    area.at(6).yCoord = inp.yCoord + 1;
-    area.at(7).xCoord = inp.xCoord + 1;
-    area.at(7).yCoord = inp.yCoord + 1;
+    vector<coords> area = createArea(inp);
 
     char thisChar = thePawn->getSymb();
 
