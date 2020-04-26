@@ -4,7 +4,14 @@
 Gameplay::Gameplay() {
 
 }
-
+/*Function Name: playGame
+ * Description: this function starts the game and intializes
+ *  the board and pawns
+ *
+ * Parameters: none
+ *
+ * Return Values: none, function is void, just used to run the game
+ */
 void Gameplay::playGame() {
     string token;
 
@@ -21,7 +28,16 @@ void Gameplay::playGame() {
 
     } while (token == "yes" || token == "Yes");
 }
-
+/*Function Name: printInstructions
+ * Description: when run this program tells you everything
+ *  about the game, including the goal, what is going on, and
+ *  the controls for the game
+ *
+ * Parameters: none
+ *
+ * Return Values: none, function is void, used for displaying
+ *  instructions for players
+ */
 void Gameplay::printInstructions() {
     string inp;
 
@@ -99,7 +115,15 @@ void Gameplay::printInstructions() {
         cin >> inp;
     } while (!(inp == "ok" || inp == "Ok" || inp == "OK"));
 }
-
+/*Funciton Name: goodbye
+ * Description: this function when run displays our goodbye message to the
+ * player (in this case the grading team!)
+ *
+ * Parameters: none
+ *
+ * Return Values: none, function is void, only used for our
+ *  goodbye message
+ */
 void Gameplay::goodbye() {
     cout << endl << "Thanks for playing, we hope you" << endl;
     cout << "had fun!" << endl;

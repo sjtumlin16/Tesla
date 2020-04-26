@@ -1,6 +1,15 @@
 #include "board.h"
 #include "constants.h"
-
+/*Function Name: Board
+ * Description: this function sets the names of the different
+ *  pawns on the board and assigns letters to tell the difference
+ *  between them
+ *
+ * Parameters: none
+ *
+ * Return Values: returns both the states of isGameOver
+ *  and elonAwake as false so the game can acutally run
+ */
 Board::Board() {
     allPawns = {&player, &yugo, &pinto, &elon, &roadster};
     allPawns.at(0)->setName("yourself?", PLAYER);
@@ -14,7 +23,19 @@ Board::Board() {
     isGameOver = false;
     elonAwake = false;
 }
-
+/*Function Name: checkSpot
+ * Description: This function allows the player to check
+ *  the surroundings for other pawns
+ *
+ * Parameters:
+ *  coords: the array used to represent the coordinates of
+ *  the playing board
+ *  allPawns: The structure used to group the different entities
+ *  on the playing board
+ *
+ * Return Value: t/f based on whether or not there is another entity next to
+ *  the player
+ */
 bool Board::checkSpot(coords inp) {
     for (int i = 0; i < allPawns.size(); i++) {
         if ((allPawns.at(i)->getCoords().xCoord == inp.xCoord) && (allPawns.at(i)->getCoords().yCoord == inp.yCoord)) {
@@ -24,7 +45,19 @@ bool Board::checkSpot(coords inp) {
 
     return false;
 }
-
+/*Function Name: whatsThere
+ * Description: This function is for checking what entity is next
+ *  to play player when the player checks
+ *
+ * Parameters:
+ *  coords: the array used to represent the coordinates of
+ *  the playing board
+ *  allPawns: The structure used to group the different entities
+ *  on the playing board
+ *
+ * Return Value: This function either returns what entity the player is
+ *  next to, or returns null if there is nothing there
+ */
 char Board::whatsThere(coords inp) {
     for (int i = 0; i < allPawns.size(); i++) {
         if ((allPawns.at(i)->getCoords().xCoord == inp.xCoord) && (allPawns.at(i)->getCoords().yCoord == inp.yCoord)) {
@@ -34,7 +67,17 @@ char Board::whatsThere(coords inp) {
 
     return 'n';
 }
-
+/*Function Name: Board
+ * Description: this function creates the board with an array
+ *  called area so the game can be displayed and function
+ *
+ * Parameters:
+ *  coords: the array used to represent the coordinates of
+ *  the playing board
+ *
+ * Return Values: returns the array titled area which is used
+ *  for the game board
+ */
 vector<coords> Board::createArea(coords inp) {
     vector<coords> area(AREA_SIZE);
     area.at(0).xCoord = inp.xCoord - 1;
@@ -56,7 +99,17 @@ vector<coords> Board::createArea(coords inp) {
 
     return area;
 }
-
+/*Function Name: checkArea
+ * Description: Checks the spot next to the player if
+ *  something is there
+ *
+ * Parameters:
+ *  coords: the array used to represent the coordinates of
+ *  the playing board
+ *
+ * Return Values: returns t/f if something is in the spot
+ *  next to the player
+ */
 bool Board::checkArea(coords inp) {
     vector<coords> area = createArea(inp);
 
@@ -68,7 +121,19 @@ bool Board::checkArea(coords inp) {
 
     return false;
 }
-
+/*Function Name: checkArea
+ * Description: Checks if there is another pawn in the
+ *  space next to the player
+ *
+ * Parameters:
+ *  coords: the array used to represent the coordinates of
+ *  the playing board
+ *  Pawn: the structure used for grouping the different types
+ *  of pawns in the game.
+ *
+ * Return Values: returns t/f if the spot next to the player has
+ *  one of the pawns
+ */
 bool Board::checkArea(coords inp, Pawn *thePawn) {
     vector<coords> area = createArea(inp);
 
@@ -82,7 +147,17 @@ bool Board::checkArea(coords inp, Pawn *thePawn) {
 
     return false;
 }
-
+/*Function Name: offBoard
+ * Description: checks if the player has reached the edge
+ *  of the board for x and y direction.
+ *
+ * Parameters:
+ *  coords: the array used to represent the coordinates of
+ *  the playing board
+ *
+ * Return Values: returns true if the player is at the edge of
+ *  the board for both x and y values
+ */
 bool Board::offBoard(coords temp) {
     if (temp.xCoord > 14 || temp.xCoord < 0) {
         return true;
@@ -94,7 +169,15 @@ bool Board::offBoard(coords temp) {
 
     return false;
 }
-
+/*Function Name: initialize
+ * Description: this function 'spawns' the pawns in random
+ *  positions on the board
+ *
+ * Parameters: none
+ *
+ * Return Values: returns true, mainly used to just place the
+ *  pawns.
+ */
 bool Board::initialize() {
     for (int i = 0; i < allPawns.size(); i++) {
         coords temp;
@@ -111,7 +194,14 @@ bool Board::initialize() {
 
     return true;
 }
-
+/*Function Name: printBoard
+ * Description: this function prints out the board and the lines
+ *  that seperate the spots the player can move
+ *
+ * Parameters: none
+ *
+ * Return Values: returns true, mainly used for printing out the board
+ */
 bool Board::printBoard() {
     char printChar;
     coords temp;
@@ -134,7 +224,15 @@ bool Board::printBoard() {
 
     return true;
 }
-
+/*Function Name: printBoardDark
+ * Description: prints out the spots that have the other pawns
+ *  that the player cannot see at first, but prints them out as
+ *  the player moves toward them.
+ *
+ * Parameters: none
+ *
+ * Return Values: returns true, mainly used to print out the board
+ */
 bool Board::printBoardDark() {
     char printChar;
     coords temp;
@@ -172,7 +270,16 @@ bool Board::printBoardDark() {
 
     return true;
 }
-
+/*Function Name: playerMove
+ * Description: this function is used to allow the player to move,
+ *  it also checks if the player is off the board or not, and updates
+ *  the other pawns to move everytime the player moves.
+ *
+ * Parameters: none
+ *
+ * Return Values: returns true, used mainly for tracking movement in
+ *  the game as it progresses
+ */
 bool Board::playerMove() {
     int x, y;
     coords newCoord, oldCoords;
@@ -246,7 +353,18 @@ bool Board::playerMove() {
 
     return true;
 }
-
+/*Function Name: activeMove
+ * Description: this function generates random directions for
+ *  the other pawns to move, while their state is set to active,
+ *  with special cases to help them move towards the player
+ *
+ * Parameters:
+ *  Pawn: the structure used for grouping the different types
+ *  of pawns in the game.
+ *
+ * Return Value: returns true, mainly used for updating the
+ *  movement for the pawns
+ */
 bool Board::activeMove(Pawn *thePawn) {
     int x, y;
     coords newCoord, oldCoords;
@@ -312,7 +430,16 @@ bool Board::activeMove(Pawn *thePawn) {
 
     return true;
 }
-
+/*Function Name: updatePawns
+ * Description: checks the pawn's locations compared to the player's
+ *  to see if the player is in close enough range to activate the pawns
+ *  and allow them to start moving.
+ *
+ * Parameters: none
+ *
+ * Return Values: returns true, mainly used for activating pawns if player is
+ *  in proximity
+ */
 void Board::updatePawns() {
     for (int i = 1; i < allPawns.size(); i++) {
         if (checkArea(allPawns.at(i)->getCoords(), &player)) {
@@ -335,7 +462,17 @@ void Board::updatePawns() {
 
     return;
 }
-
+/*Function Name: activationWarning
+ * Description: Tells the player if they moved into a sleeping pawn,
+ *  and if it's elon he will be activated and now look for the player
+ *
+ * Parameters:
+ *  Pawn: the structure used for grouping the different types
+ *  of pawns in the game.
+ *
+ * Return Values: function is void and returns nothing, mainly used
+ *  for interactions with the pawns
+ */
 void Board::activationWarning(Pawn *thePawn) {
     cout << "You ran into " << thePawn->getName() << "!" << endl;
     cout << "One more time and you're going to be on the rocket!" << endl;
@@ -347,11 +484,27 @@ void Board::activationWarning(Pawn *thePawn) {
 
     return;
 }
-
+/*Function Name: gameOver
+ * Description: if function is run, the game will be over :(
+ *
+ * Parameters: none
+ *
+ * Return Value: it returns isGameOver which is what ends the game
+ */
 bool Board::gameOver() {
     return isGameOver;
 }
-
+/*Function Name: gameOver
+ * Description: This function has the different types of game outcomes
+ *  when the game is over, either you go to space :(, you save the roadster,
+ *  or you got the wrong car, then the game officially ends.
+ *
+ * Parameters:
+ *  Pawn: the structure used for grouping the different types
+ *  of pawns in the game.
+ *
+ * Return Values: returns isGameOver = true which tells the program the game is over
+ */
 void Board::gameOver(Pawn *thePawn) {
     if (thePawn->getSymb() == 'E') {
         cout << "Welp, Elon got you. Good luck in space." << endl;
@@ -367,7 +520,14 @@ void Board::gameOver(Pawn *thePawn) {
 
     return;
 }
-
+/*Function Name: help
+ * Description: the function when run, displays tips for playing the game,
+ *  including controls and gameplay tips for winning.
+ *
+ * Parameters: none
+ *
+ * Return Values: none since function is void, just used for help menu
+ */
 void Board::help() {
     string inp;
 
@@ -391,7 +551,18 @@ void Board::help() {
         cin >> inp;
     } while (!(inp == "ok" || inp == "Ok" || inp == "OK"));
 }
-
+/*Function Name: trackPlays
+ * Description: this function tracks the amount of times the
+ *  player has played the game, and adds a chance for elon to
+ *  be awake at the start of the game the more times the game is
+ *  played.
+ *
+ * Parameters:
+ *  currPlay: used to track the amount of times the game has been played
+ *
+ * Return Values: function is void so it does not return anything, just
+ *  used to track the number of plays
+ */
 void Board::trackPlays(char currPlay) {
     bool same;
     int selection;
@@ -420,7 +591,15 @@ void Board::trackPlays(char currPlay) {
         }
     }
 }
-
+/*Function Name: hint
+ * Description: this function gives hints to the player as the
+ *  player moves throughout the play area, like whether or not
+ *  the roadster or elon is close
+ *
+ * Parameters: none
+ *
+ * Return Values: none, just used for giving hints to the player
+ */
 void Board::hint() {
     int hintType, xRange, yRange;
 

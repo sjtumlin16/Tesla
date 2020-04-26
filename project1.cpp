@@ -38,7 +38,11 @@
  *
  * Devlin Sheehan
  *  I worked on part of Board, all of Gameplay, and some documentation.
- *
+ * What I learned through this project was a lot more of how to think of
+ * functions and the logic begind them. When it comes to C++ and other coding
+ * languages I am not the best coder but I tried to be helpful and learn
+ * the logic behind what we were doing. I also learned a lot about developing
+ * my syntax. I struggled also with OOP and I had a lot of practice with that.
  */
 
 #include "pawn.h"
