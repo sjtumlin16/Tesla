@@ -5,8 +5,10 @@ Gameplay::Gameplay() {
 
 }
 /*Function Name: playGame
- * Description: this function starts the game and intializes
- *  the board and pawns
+ * Description: this function starts the game and initializes
+ *  the board and pawns. It asks for user plays until the 
+ *  game is over. At the end, it asks if the user wants to
+ *  play again.
  *
  * Parameters: none
  *
@@ -29,7 +31,7 @@ void Gameplay::playGame() {
     } while (token == "yes" || token == "Yes");
 }
 /*Function Name: printInstructions
- * Description: when run this program tells you everything
+ * Description: when run this function tells you everything
  *  about the game, including the goal, what is going on, and
  *  the controls for the game
  *
@@ -93,8 +95,8 @@ void Gameplay::printInstructions() {
     cout << "where Elon is, and some will tell you fun" << endl;
     cout << "factoids!" << endl;
     cout << "    - Remember, be careful. Because you'd" << endl;
-    cout << "rather have a Roadster be sent to space." << endl;
-    cout << endl;
+    cout << "rather have a Roadster than be sent to" << endl;
+    cout << "space!" << endl;
     cout << "                Controls                " << endl;
     cout << "Move up:     <W>" << endl;
     cout << "Move down:   <S>" << endl;

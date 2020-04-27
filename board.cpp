@@ -28,7 +28,7 @@ Board::Board() {
  *  the surroundings for other pawns
  *
  * Parameters:
- *  coords: the array used to represent the coordinates of
+ *  coords: the structure used to represent the coordinates of
  *  the playing board
  *  allPawns: The structure used to group the different entities
  *  on the playing board
@@ -50,9 +50,9 @@ bool Board::checkSpot(coords inp) {
  *  to play player when the player checks
  *
  * Parameters:
- *  coords: the array used to represent the coordinates of
+ *  coords: the structure used to represent the coordinates of
  *  the playing board
- *  allPawns: The structure used to group the different entities
+ *  allPawns: The vector used to group the different entities
  *  on the playing board
  *
  * Return Value: This function either returns what entity the player is
@@ -72,7 +72,7 @@ char Board::whatsThere(coords inp) {
  *  called area so the game can be displayed and function
  *
  * Parameters:
- *  coords: the array used to represent the coordinates of
+ *  coords: the structure used to represent the coordinates of
  *  the playing board
  *
  * Return Values: returns the array titled area which is used
@@ -104,7 +104,7 @@ vector<coords> Board::createArea(coords inp) {
  *  something is there
  *
  * Parameters:
- *  coords: the array used to represent the coordinates of
+ *  coords: the structure used to represent the coordinates of
  *  the playing board
  *
  * Return Values: returns t/f if something is in the spot
@@ -126,9 +126,9 @@ bool Board::checkArea(coords inp) {
  *  space next to the player
  *
  * Parameters:
- *  coords: the array used to represent the coordinates of
+ *  coords: the structure used to represent the coordinates of
  *  the playing board
- *  Pawn: the structure used for grouping the different types
+ *  Pawn: the class used for grouping the different types
  *  of pawns in the game.
  *
  * Return Values: returns t/f if the spot next to the player has
@@ -152,7 +152,7 @@ bool Board::checkArea(coords inp, Pawn *thePawn) {
  *  of the board for x and y direction.
  *
  * Parameters:
- *  coords: the array used to represent the coordinates of
+ *  coords: the structure used to represent the coordinates of
  *  the playing board
  *
  * Return Values: returns true if the player is at the edge of
@@ -273,7 +273,7 @@ bool Board::printBoardDark() {
 /*Function Name: playerMove
  * Description: this function is used to allow the player to move,
  *  it also checks if the player is off the board or not, and updates
- *  the other pawns to move everytime the player moves.
+ *  the other pawns to move every time the player moves.
  *
  * Parameters: none
  *
@@ -594,7 +594,7 @@ void Board::trackPlays(char currPlay) {
 /*Function Name: hint
  * Description: this function gives hints to the player as the
  *  player moves throughout the play area, like whether or not
- *  the roadster or elon is close
+ *  the roadster or Elon is close
  *
  * Parameters: none
  *
@@ -619,7 +619,7 @@ void Board::hint() {
             cout << "ELON IS RIGHT NEXT TO YOU!\n" << endl;
         }
         else if (xRange < MEDIUM_PAWN && yRange < MEDIUM_PAWN) {
-            cout << "Elon is withing striking \ndistance!" << endl;
+            cout << "Elon is within striking \ndistance!" << endl;
         }
         else if (xRange < FAR_PAWN && yRange < FAR_PAWN) {
             cout << "Elon is hot on your tracks.\n" << endl;

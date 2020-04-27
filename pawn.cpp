@@ -15,11 +15,11 @@ Pawn::Pawn() {
     this->yCoord = NULL_COORD_Y;
     this->activated = false;
 }
-/*Function Name: Pawn
+/*Function Name: setName
  * Description: this function is what sets a pawn's
  *  name and symbol
  *
- * Parameters: none
+ * Parameters: name and symbol for this pawn
  *
  * Return Values: none, function is void
  */
@@ -33,10 +33,10 @@ void Pawn::setName(string name, char symb) {
  * Description: this function sets the coords for a pawn
  *
  * Parameters:
- *  coords: the array used to represent the coordinates of
+ *  coords: the structure used to represent the coordinates of
  *  the playing board
  *
- * Return Values: returns true
+ * Return Values: returns true for success
  */
 bool Pawn::setCoords(coords temp) {
     this->xCoord = temp.xCoord;
@@ -87,7 +87,7 @@ char Pawn::getSymb() {
  *
  * Parameters: none
  *
- * Return Values: returns true
+ * Return Values: returns true if the state was changed
  */
 bool Pawn::activate() {
     if (activated) {
@@ -103,7 +103,7 @@ bool Pawn::activate() {
  *
  * Parameters: none
  *
- * Return Values: returns true
+ * Return Values: returns true if the pawn has been changed
  */
 bool Pawn::deactivate() {
     if (!activated) {
@@ -179,7 +179,7 @@ int Pawn::xSign(coords ref) {
     return num / fabs(num);
 }
 /*Function Name: yDiff
- * Description: checks the distance between two points and if positive returns that number
+ * Description: checks the distance between two points and if returns that number
  *
  * Parameters:
  *  ref: the temp coords being used for checking
@@ -197,7 +197,7 @@ int Pawn::yDiff(coords ref) {
     return fabs(num);
 }
 /*Function Name: xDiff
- * Description: checks the distance between two points and if positive returns that number
+ * Description: checks the distance between two points and returns that number
  *
  * Parameters:
  *  ref: the temp coords being used for checking
